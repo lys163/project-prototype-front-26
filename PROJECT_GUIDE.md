@@ -239,17 +239,15 @@ type IllustrationStyle = 'watercolor' | 'oil' | 'sketch' | '3d' | 'anime';
 
 ---
 
-## 배포 (CI/CD)
+## 현재 개발 환경
 
-**파이프라인:** `.github/workflows/deploy.yml`
+- Frontend: `http://localhost:3000`
+- Spring Backend: `http://localhost:8080`
+- 개발 API 요청은 상대 경로로 Vite proxy를 거쳐 Backend로 전달됩니다.
+- Production API/DNS는 아직 미정이며, 향후 Backend 주소는 `VITE_API_URL` 환경변수로 주입합니다.
+- `VITE_` 환경변수는 browser bundle에 공개될 수 있으므로 Secret, API key, credential을 저장하지 않습니다.
 
-```
-main 브랜치 push → GitHub Actions → SSH로 홈서버 접속 →
-  git pull → pnpm install → pnpm build → nginx reload
-```
-
-**서버 경로:** `/home/jang/bookai`
-**도메인:** `mongle.cloud` (이미지: `img.mongle.cloud`)
+로컬 기본값은 별도 `.env` 없이 동작합니다. Backend 주소를 바꿔야 할 때만 `.env.example`을 `.env.local`로 복사해 `VITE_PROXY_TARGET`을 조정합니다. `.env.local`은 Git에 commit하지 않습니다.
 
 ---
 

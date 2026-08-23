@@ -1,8 +1,8 @@
 import { z } from "zod";
 
-// 빈 문자열("")이면 상대경로로 호출 → dev 서버 프록시가 백엔드로 전달(CORS 우회).
-// undefined(프로덕션 빌드 등)면 배포 백엔드로 직접 호출.
-const API_BASE_URL = import.meta.env.VITE_API_URL ?? "https://mongle.cloud";
+// 빈 문자열 또는 미설정이면 상대경로로 호출한다.
+// 개발에서는 Vite proxy가 로컬 Spring Backend로 전달하고, 배포 주소는 VITE_API_URL로 주입한다.
+const API_BASE_URL = import.meta.env.VITE_API_URL ?? "";
 
 export interface UserInfo {
   userId: string;

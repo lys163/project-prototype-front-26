@@ -6,14 +6,14 @@ import { fetchBanners, fetchBestsellers, fetchBooks, fetchCategories, type Banne
 import { isLoggedIn, fetchUserMe, removeAccessToken, clearUserCache } from "../lib/auth";
 
 const HERO_ILLUSTRATION = {
-  src: "https://img.mongle.cloud/picturebook/users/9311196f-aceb-41ef-937f-e04bda9de4b9/7511d991-8d84-4694-89fc-a9ee3a6a8f91.svg",
+  src: "/favicon.svg",
   alt: "AI로 만드는 나만의 동화책",
 };
 
 const FEATURE_ICONS = {
-  story: "https://img.mongle.cloud/picturebook/users/9311196f-aceb-41ef-937f-e04bda9de4b9/b641b25f-aaea-45fa-af08-5aec3d4b77fd.png",
-  illustration: "https://img.mongle.cloud/picturebook/users/9311196f-aceb-41ef-937f-e04bda9de4b9/c700d0e7-62f1-4a9c-abfd-c8a353491136.png",
-  complete: "https://img.mongle.cloud/picturebook/users/9311196f-aceb-41ef-937f-e04bda9de4b9/84a114ed-8746-4090-921c-3008150764cb.png",
+  story: "/favicon.svg",
+  illustration: "/favicon.svg",
+  complete: "/favicon.svg",
 };
 type SliderSectionProps = {
   title: string;
@@ -501,4 +501,3 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
-
