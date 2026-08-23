@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Space+Grotesk:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Playfair Display", serif;
+  --font-mono: "Space Grotesk", monospace;
+  --font-headline: "Plus Jakarta Sans", sans-serif;
+  --font-body: "Manrope", sans-serif;
+  --font-label: "Manrope", sans-serif;
+
+  --color-primary: #3f57bb;
+  --color-on-primary: #faf8ff;
+  --color-primary-container: #b1beff;
+  --color-on-primary-container: #143196;
+  
+  --color-secondary: #3b675d;
+  --color-on-secondary: #e3fff6;
+  --color-secondary-container: #cbfbee;
+  --color-on-secondary-container: #366258;
+
+  --color-tertiary: #006c57;
+  --color-on-tertiary: #e4fff4;
+  --color-tertiary-container: #77f2d0;
+  --color-on-tertiary-container: #005948;
+
+  --color-background: #fbf8ff;
+  --color-surface: #fbf8ff;
+  --color-on-surface: #273057;
+  --color-on-surface-variant: #545d86;
+  --color-surface-container: #ececff;
+  --color-surface-container-low: #f3f2ff;
+  --color-surface-container-high: #e5e7ff;
+  --color-surface-container-highest: #dde1ff;
+  --color-surface-container-lowest: #ffffff;
+  
+  --color-outline: #7078a4;
+  --color-outline-variant: #a7b0de;
+  
+  --color-error: #ac3149;
+  --color-on-error: #fff7f7;
+  --color-error-container: #f76a80;
+  --color-on-error-container: #68001f;
+
+  --radius-xl: 1.5rem;
+  --radius-2xl: 2rem;
+  --radius-3xl: 3rem;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-on-surface font-body antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-headline tracking-tight;
+  }
+}
+
+.glass {
+  @apply bg-white/70 backdrop-blur-xl border border-white/20 shadow-xl;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+}
+
+.storybook-bg {
+  background-image: url(https://lh3.googleusercontent.com/aida-public/AB6AXuD4kOZ_Evp_fCYaeLupDndcaZ5xONs_1-d81wSIWPXKm6sMYLfkHOSzBoHq3I6mzVW4bJ0t9qR7kmdYdHEgE_B32a_4bH87Nr4x8JqI5lDD7aMzS3V9NojoWA4y49X2VWeLJz21xwsZZvyaNYE7ap6W6pasFgD5v91s08tnHPIg88zr3s0ykajExSk1MesGjWQPtl7xjAItNpm6TuMRJkLHepAVHzPmqremm6iPn8UznK0yuui8R0NDFDStw7X-TNrDg6QDstITiGBG);
+  background-size: cover;
+  background-position: center;
+}
+
+.magical-gradient {
+  background-image: radial-gradient(circle at 50% 0%, rgba(63, 87, 187, 0.1) 0%, transparent 70%),
+                    radial-gradient(circle at 100% 100%, rgba(59, 103, 93, 0.05) 0%, transparent 50%);
+}
+
+.book-shadow {
+  box-shadow: 20px 20px 60px rgba(0, 0, 0, 0.1),
+              -5px -5px 20px rgba(255, 255, 255, 0.5);
+}
+
+.pb-safe-area-inset-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
