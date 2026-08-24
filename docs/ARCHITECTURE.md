@@ -22,4 +22,4 @@ LoginPage → `/oauth2/authorization/{provider}` → Spring → refresh-token Ht
 
 ## Storage
 
-Frontend → `POST /api/storage/presigned-upload` → presigned URL 응답 → browser direct `PUT` → `publicUrl` 사용 흐름이다. Frontend는 MinIO client를 직접 사용하지 않는다.
+Frontend → `POST /api/storage/presigned-upload` (`filename`, `contentType`, `fileSize`) → signed POST form 응답 → browser가 returned fields와 file을 `FormData`에 담아 MinIO로 direct `POST` → `publicUrl` 사용 흐름이다. Frontend는 MinIO client를 직접 사용하지 않으며 Backend용 Bearer/cookie를 MinIO 요청에 전달하지 않는다.

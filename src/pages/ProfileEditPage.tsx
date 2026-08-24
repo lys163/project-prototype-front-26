@@ -59,8 +59,8 @@ const ProfileEditPage = () => {
     const file = e.target.files?.[0];
     if (!file) return;
 
-    if (!file.type.startsWith("image/")) {
-      setError("이미지 파일만 업로드할 수 있습니다.");
+    if (!["image/jpeg", "image/png", "image/webp"].includes(file.type)) {
+      setError("JPEG, PNG, WebP 이미지만 업로드할 수 있습니다.");
       return;
     }
     if (file.size > MAX_IMAGE_SIZE_BYTES) {

@@ -9,7 +9,7 @@
 - [CONFIRMED] BrowserRouter와 lazy page, local state 중심 구조다.
 - [CONFIRMED] `fetchWithAuth`, Bearer header, credentials include, 401 refresh retry가 존재한다.
 - [CONFIRMED] access token은 callback query에서 받아 localStorage에 보관한다.
-- [CONFIRMED] presigned upload는 Spring 발급 URL로 직접 PUT한다.
+- [CONFIRMED] presigned upload는 Spring이 발급한 signed form fields로 MinIO에 multipart/form-data POST하며 JPEG/PNG/WebP와 최대 5 MiB를 Storage policy로 제한한다.
 - [CONFIRMED] test, CI, deployment config와 실제 AI generation API workflow는 없다.
 - [CONFIRMED] Wizard는 입력/SpeechRecognition/demo UI만 제공한다.
 

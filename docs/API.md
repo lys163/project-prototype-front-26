@@ -16,6 +16,8 @@
 | ranking/category/banner | `/api/ranking/...`, `/api/categories`, `/api/banners` | `lib/api.ts` |
 | storage | `POST /api/storage/presigned-upload` | `lib/storage.ts` |
 
+[CONFIRMED] Storage presign request는 `filename`, `contentType`, `fileSize`를 보내며 JPEG/PNG/WebP와 최대 5 MiB만 허용합니다. Response의 `uploadUrl`과 signed `fields`를 그대로 `FormData`에 추가하고 마지막에 `file` field를 넣어 MinIO로 POST합니다. 성공 후 `publicUrl`을 profile update에 사용합니다.
+
 [CONFIRMED] Frontend가 호출하는 method/path는 Spring controller mapping과 확인한 범위에서 일치한다. 인증 요구는 Spring security config가 최종 기준이며 Frontend의 token 존재 여부는 UX 판단일 뿐이다.
 
 ## 변경 규칙
