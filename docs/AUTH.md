@@ -4,7 +4,7 @@
 
 [CONFIRMED] `LoginPage.tsx`는 `redirectToKakaoLogin`/`redirectToNaverLogin`을 호출한다. `auth.ts`는 `/oauth2/authorization/kakao` 또는 `/oauth2/authorization/naver`로 browser redirect한다.
 
-[CONFIRMED] Spring `OAuth2SuccessHandler`는 access token과 refresh token을 만들고 refresh token을 HttpOnly cookie로 설정한 뒤 `${app.frontend-url}/oauth/callback?accessToken=...&isNewUser=...`로 redirect한다. Frontend `OAuthCallbackPage`는 두 query parameter를 읽고 access token을 localStorage에 저장한다.
+[CONFIRMED] Spring `OAuth2SuccessHandler`는 refresh token을 만들고 HttpOnly cookie로 설정한 뒤 `${app.frontend-url}/oauth/callback?isNewUser=...`로 redirect한다. Frontend `OAuthCallbackPage`는 `refreshAccessToken`을 호출하고, refresh 응답의 access token이 localStorage에 저장된 뒤 신규/기존 사용자 흐름으로 분기한다.
 
 ## API와 refresh
 
@@ -18,4 +18,4 @@
 
 ## 현재 확인된 보안 개선 후보
 
-[INFERRED] query access token의 URL/history 노출, callback URL cleanup, refresh 기반 초기 token 획득, localStorage token 장기 정책은 개선 검토 대상이다. 이는 현재 구현 완료나 승인된 OAuth 설계가 아니다. OAuth/cookie/CORS 변경은 Spring과 provider 설정을 함께 검증해야 한다.
+[INFERRED] callback URL cleanup과 localStorage token 장기 정책은 별도 개선 검토 대상이다. OAuth/cookie/CORS 변경은 Spring과 provider 설정을 함께 검증해야 한다.

@@ -1,42 +1,54 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "motion/react";
 import { Sparkles, AlertCircle } from "lucide-react";
 import confetti from "canvas-confetti";
-import { setAccessToken } from "../lib/auth";
+import { refreshAccessToken } from "../lib/auth";
 
 const OAuthCallbackPage = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const [error, setError] = useState(false);
   const [success, setSuccess] = useState(false);
+  const refreshPromiseRef = useRef<Promise<string | null> | null>(null);
 
   useEffect(() => {
-    const accessToken = searchParams.get("accessToken");
+    let active = true;
+    let redirectTimer: number | undefined;
     const isNewUser = searchParams.get("isNewUser") === "true";
 
-    if (!accessToken) {
-      setError(true);
-      setTimeout(() => navigate("/login"), 3000);
-      return;
+    if (!refreshPromiseRef.current) {
+      refreshPromiseRef.current = refreshAccessToken();
     }
 
-    // 토큰 저장
-    setAccessToken(accessToken);
+    void refreshPromiseRef.current.then((accessToken) => {
+      if (!active) return;
 
-    if (isNewUser) {
-      // 신규 유저: 폭죽 + 선택 화면
-      confetti({
-        particleCount: 150,
-        spread: 70,
-        origin: { y: 0.6 },
-        colors: ["#6366f1", "#a855f7", "#ec4899"],
-      });
-      setSuccess(true);
-    } else {
-      // 기존 유저: 바로 홈으로
-      navigate("/");
-    }
+      if (!accessToken) {
+        setError(true);
+        redirectTimer = window.setTimeout(() => navigate("/login"), 3000);
+        return;
+      }
+
+      if (isNewUser) {
+        // 신규 유저: 폭죽 + 선택 화면
+        confetti({
+          particleCount: 150,
+          spread: 70,
+          origin: { y: 0.6 },
+          colors: ["#6366f1", "#a855f7", "#ec4899"],
+        });
+        setSuccess(true);
+      } else {
+        // 기존 유저: 바로 홈으로
+        navigate("/");
+      }
+    });
+
+    return () => {
+      active = false;
+      if (redirectTimer !== undefined) window.clearTimeout(redirectTimer);
+    };
   }, [searchParams, navigate]);
 
   const goHome = () => navigate("/");

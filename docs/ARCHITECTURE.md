@@ -12,7 +12,7 @@ Page → `src/lib/api.ts` 또는 `src/lib/storage.ts` → `fetchWithAuth` (`src/
 
 ## 인증 흐름
 
-LoginPage → `/oauth2/authorization/{provider}` → Spring → `/oauth/callback` → `OAuthCallbackPage` → localStorage access token → `fetchWithAuth` Bearer request 흐름이다. refresh token은 Frontend state가 아닌 HttpOnly cookie 계약을 사용한다.
+LoginPage → `/oauth2/authorization/{provider}` → Spring → refresh-token HttpOnly cookie와 `/oauth/callback?isNewUser=...` redirect → `OAuthCallbackPage` → `/api/auth/refresh` → localStorage access token → `fetchWithAuth` Bearer request 흐름이다.
 
 ## 상태와 route 보호
 

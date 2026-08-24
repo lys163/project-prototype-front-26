@@ -6,7 +6,7 @@ const API_BASE_URL = import.meta.env.VITE_API_URL ?? "";
 
 export interface UserInfo {
   userId: string;
-  email: string;
+  email: string | null;
   nickname: string;
   profileImage: string;
   isNewUser?: boolean;
@@ -14,7 +14,7 @@ export interface UserInfo {
 
 const userInfoSchema: z.ZodType<UserInfo> = z.object({
   userId: z.string(),
-  email: z.string(),
+  email: z.string().nullable(),
   nickname: z.string(),
   profileImage: z.string(),
   // /api/user/me 응답엔 isNewUser가 없다(OAuth 콜백 전용 값). 필수로 두면 검증 실패로 로그인 표시가 안 됨.
