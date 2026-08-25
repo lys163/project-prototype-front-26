@@ -2,12 +2,13 @@
 import { useNavigate } from "react-router-dom";
 import { Palette } from "lucide-react";
 import { MOCK_BOOKS } from "../constants";
-import { fetchUserMe, isLoggedIn, type UserInfo } from "../lib/auth";
+import { fetchUserMe, isLoggedIn, logout, type UserInfo } from "../lib/auth";
 
 const ProfilePage = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<UserInfo | null>(null);
   const [loading, setLoading] = useState(true);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
   const monthlyCompleted = Math.max(1, Math.floor(MOCK_BOOKS.length / 3));
   const averageRating = 4.6;
   const favoriteCategory = "판타지";
@@ -31,6 +32,12 @@ const ProfilePage = () => {
       setLoading(false);
     });
   }, [navigate]);
+
+  const handleLogout = async () => {
+    setIsLoggingOut(true);
+    await logout();
+    navigate("/login");
+  };
 
   if (loading) {
     return (
@@ -78,6 +85,14 @@ const ProfilePage = () => {
               프로필 수정
             </button>
             <button className="px-6 py-3 glass rounded-xl font-bold hover:bg-white transition-all text-sm md:text-base">설정</button>
+            <button
+              type="button"
+              onClick={handleLogout}
+              disabled={isLoggingOut}
+              className="px-6 py-3 glass rounded-xl font-bold hover:bg-white transition-all text-sm md:text-base disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {isLoggingOut ? "로그아웃 중..." : "로그아웃"}
+            </button>
           </div>
         </div>
 

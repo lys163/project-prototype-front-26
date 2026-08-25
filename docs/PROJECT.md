@@ -22,6 +22,8 @@
 
 [CONFIRMED] `WizardPage`에 title/style/page-count/prompt 입력과 SpeechRecognition이 있다. 실제 AI 생성 API, polling, persisted result, retry, 결과 저장 호출은 찾지 못했다. step 2/3은 demo UI다.
 
+[CONFIRMED] `@google/genai` dependency는 `package.json`에 남아 있지만 Frontend source import/consumer는 없고 `.env.example`에도 Gemini/provider key가 없습니다. Gemini는 현재 browser runtime requirement가 아닙니다.
+
 ## 배포·테스트
 
 [CONFIRMED] CI, deployment configuration, automated test framework/source는 repository에 없다. 현재 검증 명령은 `pnpm lint`, `pnpm build`다. Production API/DNS는 `[UNKNOWN]`이다.

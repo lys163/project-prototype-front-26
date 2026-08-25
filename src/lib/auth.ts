@@ -58,17 +58,16 @@ export function redirectToNaverLogin(): void {
 
 export async function logout(): Promise<void> {
   try {
-    // 토큰이 있을 때만 로그아웃 API 호출
-    if (getAccessToken()) {
-      await fetchWithAuth("/api/auth/logout", { method: "POST" });
-    }
+    await fetch(`${API_BASE_URL}/api/auth/logout`, {
+      method: "POST",
+      credentials: "include",
+    });
   } catch {
     // 로그아웃 API 실패와 무관하게 로컬 상태는 정리
   }
 
   removeAccessToken();
   clearUserCache();
-  document.cookie = "token=; path=/; max-age=0";
 }
 
 export async function refreshAccessToken(): Promise<string | null> {
